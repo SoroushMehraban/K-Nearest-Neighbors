@@ -48,32 +48,3 @@ class KNearestNeighbor:
         predictions = np.array(predictions)
         accuracy = self.loss(predictions)
         return accuracy
-
-
-
-
-def run_algorithm(dataset, dataset_name):
-    print(f"---- Running k-nearest neighbors on {dataset_name} dataset ----")
-    print(f"Number of features: {len(dataset.columns)}")
-    print(f"Number of rows: {len(dataset)}")
-
-    start_time = timeit.default_timer()
-    knn = KNearestNeighbor(dataset, k=10)
-    accuracy = knn.predict()
-    end_time = timeit.default_timer()
-    print()
-    print(f"Accuracy: {accuracy:.2f}%")
-    print(f"Run time: {end_time - start_time:.2f} seconds")
-    print()
-
-
-if __name__ == '__main__':
-    iris_df = get_iris_dataset()
-    heart_df = get_heart_disease_uci_dataset()
-    campus_recruitment_df = get_campus_recruitment_dataset()
-    stroke_df = get_stroke_prediction_dataset()
-
-    run_algorithm(dataset=iris_df, dataset_name="Iris")
-    run_algorithm(dataset=heart_df, dataset_name="Heart Disease UCI")
-    run_algorithm(dataset=campus_recruitment_df, dataset_name="Campus Recruitment")
-    run_algorithm(dataset=stroke_df, dataset_name="Stroke Prediction")
