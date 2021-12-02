@@ -19,7 +19,11 @@ class KNearestNeighbor:
     def get_k_neighbors(self, target_row):
         distances = []
         for train_row in self.train_data:
-            distance = self.euclidean_distance(train_row, target_row)
+            test_dataset_has_label = train_row.size == target_row.size
+            if test_dataset_has_label:
+                distance = self.euclidean_distance(train_row[:-1], target_row[:-1])  # every column except label
+            else:
+                distance = self.euclidean_distance(train_row[:-1], target_row)
             distances.append(distance)
 
         sorted_indexes = sorted(range(len(self.train_data)), key=lambda i: distances[i])
